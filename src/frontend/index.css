@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Bricolage Grotesque ─── */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/BricolageGrotesque-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/BricolageGrotesque-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/assets/fonts/BricolageGrotesque-800.woff2') format('woff2');
+}
+
+/* ─── DM Sans (body) ─── */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/DMSans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/DMSans-500.woff2') format('woff2');
+}
+
+@layer base {
+  :root {
+    /* Dark-only theme — no light mode toggle */
+    --radius: 0.375rem;
+
+    /* Core palette */
+    --background: 0.09 0 0;
+    --foreground: 0.97 0 0;
+    --card: 0.13 0 0;
+    --card-foreground: 0.97 0 0;
+    --popover: 0.13 0 0;
+    --popover-foreground: 0.97 0 0;
+
+    /* Primary = white */
+    --primary: 0.97 0 0;
+    --primary-foreground: 0.09 0 0;
+
+    /* Secondary = dim surface */
+    --secondary: 0.18 0 0;
+    --secondary-foreground: 0.97 0 0;
+
+    /* Muted */
+    --muted: 0.18 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    /* Accent = amber warm */
+    --accent: 0.75 0.16 70;
+    --accent-foreground: 0.09 0 0;
+
+    /* Accent dim (for subtle RPE hover) */
+    --accent-dim: 0.55 0.12 70;
+
+    /* RPE selected glow */
+    --rpe-glow: oklch(0.75 0.16 70 / 0.35);
+
+    /* Day pill: lifted inactive surface */
+    --day-surface: 0.17 0 0;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.97 0 0;
+
+    /* Borders */
+    --border: 0.22 0 0;
+    --input: 0.22 0 0;
+    --ring: 0.75 0.16 70;
+
+    /* Day pill colors */
+    --day-inactive: 0.16 0 0;
+    --day-inactive-text: 0.55 0 0;
+    --day-active-bg: 0.75 0.16 70;
+    --day-active-text: 0.09 0 0;
+
+    /* Charts (unused but keeps shadcn happy) */
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    /* Sidebar (unused) */
+    --sidebar: 0.13 0 0;
+    --sidebar-foreground: 0.97 0 0;
+    --sidebar-primary: 0.75 0.16 70;
+    --sidebar-primary-foreground: 0.09 0 0;
+    --sidebar-accent: 0.18 0 0;
+    --sidebar-accent-foreground: 0.97 0 0;
+    --sidebar-border: 0.22 0 0;
+    --sidebar-ring: 0.75 0.16 70;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* RPE selected state with amber glow */
+  .rpe-selected {
+    background-color: oklch(var(--accent));
+    color: oklch(var(--accent-foreground));
+    box-shadow: 0 0 0 1px oklch(var(--accent)), 0 0 12px 0 var(--rpe-glow);
+  }
+
+  /* Today dot indicator */
+  .today-dot::after {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background-color: oklch(var(--accent));
+    margin: 3px auto 0;
+  }
+}
